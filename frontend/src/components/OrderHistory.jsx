@@ -10,7 +10,7 @@ function OrderHistory() {
   if (!user) return;
 
   function getOrders() {
-    fetch(`http://localhost:5000/api/orders?email=${user.email}`, {
+    fetch(`https://food-ordering-replica-production.up.railway.app/api/orders?email=${user.email}`, {
       cache: "no-store",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`

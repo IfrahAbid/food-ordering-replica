@@ -21,7 +21,7 @@ function Menu() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    fetch("https://food-ordering-replica-production.up.railway.app/api/products")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);

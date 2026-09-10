@@ -10,7 +10,7 @@ function AdminOrders() {
       return;
     }
 
-    fetch("http://localhost:5000/api/orders", {
+    fetch("https://food-ordering-replica-production.up.railway.app/api/orders", {
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
       }
@@ -27,7 +27,7 @@ function AdminOrders() {
   async function updateStatus(orderId, status) {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/orders/${orderId}/status`,
+        `https://food-ordering-replica-production.up.railway.app/api/orders/${orderId}/status`,
         {
           method: "PUT",
           headers: {

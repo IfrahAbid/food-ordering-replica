@@ -16,7 +16,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/login",
+        "https://food-ordering-replica-production.up.railway.app/api/users/login",
         {
           method: "POST",
           headers: {
