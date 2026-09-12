@@ -58,6 +58,10 @@ function Navbar() {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
+  const [cartCount, setCartCount] = useState(
+  JSON.parse(localStorage.getItem("cart"))?.length || 0
+);
+
   useEffect(() => {
     function updateUser() {
       setUser(JSON.parse(localStorage.getItem("user")) || null);
@@ -69,6 +73,19 @@ function Navbar() {
       window.removeEventListener("login", updateUser);
     };
   }, []);
+
+  useEffect(() => {
+  function updateCart() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartCount(cart.length);
+  }
+
+  window.addEventListener("cartUpdated", updateCart);
+
+  return () => {
+    window.removeEventListener("cartUpdated", updateCart);
+  };
+}, []);
 
   async function searchDeliveryLocation() {
     if (!deliverySearch.trim()) {
@@ -310,7 +327,28 @@ function Navbar() {
         <div className="nav-right">
 
           <Link to="/cart" className="nav-button">
-            🛒 Cart
+          🛒 Cart
+          <span
+  className="cart-badge"
+  style={{
+    position: "absolute",
+    top: "-8px",
+    right: "-8px",
+    background: "#f97316",
+    color: "white",
+    width: "20px",
+    height: "20px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "12px",
+    fontWeight: "bold",
+    zIndex: 10
+  }}
+>
+  {cartCount}
+</span>
           </Link>
 
           {user ? (

@@ -55,28 +55,33 @@ function ProductDetails() {
         </div>
 
         <button
-        className="add-cart-button"
-        onClick={() => {
-          const existingProduct = cart.find(
-            (item) => item.id === product.id
-          );
-          let newCart;
-          if (existingProduct) {
-            newCart = cart.map((item) =>
-              item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-          );
-        } else {
-          newCart = [...cart, { ...product, quantity }];
-        }
-        setCart(newCart);
-        localStorage.setItem("cart", JSON.stringify(newCart));
-        alert("Product added to cart!");
-      }}
-          >
-            ADD TO CART
-          </button>
+  className="add-cart-button"
+  onClick={() => {
+    const existingProduct = cart.find(
+      (item) => item.id === product.id
+    );
+
+    let newCart;
+
+    if (existingProduct) {
+      newCart = cart.map((item) =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + quantity }
+          : item
+      );
+    } else {
+      newCart = [...cart, { ...product, quantity }];
+    }
+
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    window.dispatchEvent(new Event("cartUpdated"));
+
+    alert("Product added to cart!");
+  }}
+>
+  ADD TO CART
+</button>
       </div>
     </section>
   );
