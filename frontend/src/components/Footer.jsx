@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <footer className="footer">
@@ -9,9 +11,9 @@ function Footer() {
       <p>Foodie Copyright © 2026. All Rights Reserved.</p>
 
       <div className="footer-policy">
-        <a href="/terms">TERMS & CONDITIONS</a>
+        <Link to="/terms">TERMS & CONDITIONS</Link>
         <span>|</span>
-        <a href="/privacy-policy">PRIVACY POLICY</a>
+        <Link to="/privacy">PRIVACY POLICY</Link>
       </div>
 
     </footer>

@@ -7,6 +7,48 @@ import { useState, useEffect } from "react";
 function Home() {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [showAllBlogs, setShowAllBlogs] = useState(false);
+  const [email, setEmail] = useState("");
+  const [subscribeMessage, setSubscribeMessage] = useState("");
+  const [subscribeLoading, setSubscribeLoading] = useState(false);
+
+  const API_URL = "https://food-ordering-replica-production.up.railway.app";
+
+  async function handleSubscribe(e) {
+    e.preventDefault();
+    setSubscribeMessage("");
+
+    if (!email.trim()) {
+      setSubscribeMessage("Please enter your email address.");
+      return;
+    }
+
+    try {
+      setSubscribeLoading(true);
+
+      const response = await fetch(`${API_URL}/subscribe`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Subscription failed.");
+      }
+
+      setSubscribeMessage("Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      setSubscribeMessage(
+        error.message || "Something went wrong. Please try again."
+      );
+    } finally {
+      setSubscribeLoading(false);
+    }
+  }
 
   const banners = [
     {
@@ -183,10 +225,21 @@ function Home() {
   <h2>Special Offers & News</h2>
   <p>Subscribe now for news, promotions and more delivered right to your inbox</p>
 
-  <div className="subscribe-box">
-    <input type="email" placeholder="Enter your email" />
-    <button>SUBSCRIBE</button>
-  </div>
+  <form className="subscribe-box" onSubmit={handleSubscribe}>
+    <input
+      type="email"
+      placeholder="Enter your email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+    />
+    <button type="submit" disabled={subscribeLoading}>
+      {subscribeLoading ? "SUBSCRIBING..." : "SUBSCRIBE"}
+    </button>
+  </form>
+
+  {subscribeMessage && (
+    <p className="subscribe-message">{subscribeMessage}</p>
+  )}
 </section>
 
 <Footer />

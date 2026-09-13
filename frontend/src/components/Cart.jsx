@@ -16,6 +16,7 @@ function Cart() {
 
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    window.dispatchEvent(new Event("cartUpdated"));
   }
 
   function removeItem(index) {
@@ -23,6 +24,7 @@ function Cart() {
 
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    window.dispatchEvent(new Event("cartUpdated"));
   }
 
   const total = cart.reduce(

@@ -2,6 +2,7 @@ import "./App.css";
 import Branches from "./components/Branches";
 import Blog from "./components/Blog";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsConditions from "./components/TermsConditions";
 import BlogArticle from "./components/BlogArticle";
 import OrderHistory from "./components/OrderHistory";
 import AdminOrders from "./components/AdminOrders";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/branches" element={<Branches />} />
         <Route path="/blog/:id" element={<BlogArticle />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsConditions />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
